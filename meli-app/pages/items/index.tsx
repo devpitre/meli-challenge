@@ -6,12 +6,16 @@ import { FindProductsDto } from 'types/dtos/find-products-dto';
 import Image from 'next/image';
 import Link from 'next/link';
 import free_shipping from '@icons/ic_shipping.png';
+import axios from 'axios';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query } = context;
-  const { data } = await appInstance.get<FindProductsDto>('/products', {
-    params: { q: query.search },
-  });
+  const { data } = await axios.get<FindProductsDto>(
+    `${process.env.NEXT_PUBLIC_API_URL}/products`,
+    {
+      params: { q: query.search },
+    }
+  );
   return { props: { categories: data.categories, items: data.items } };
 };
 

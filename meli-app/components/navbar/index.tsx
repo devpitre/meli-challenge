@@ -11,7 +11,6 @@ function Navbar() {
   const [search, setSearch] = useState('');
 
   const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     router.push({ pathname: 'items', query: { search } });
   };
 
@@ -20,7 +19,11 @@ function Navbar() {
       <Link href="/">
         <Image src={LogoML} alt="meli_logo" width={60} height={35} />
       </Link>
-      <form onSubmit={onFormSubmit} className="flex flex-1 flex-row">
+      <form
+        onSubmit={onFormSubmit}
+        className="flex flex-1 flex-row"
+        role="form"
+      >
         <input
           type="text"
           className="px-4 text-lg placeholder:text-gray-200 w-full focus:border-none focus:outline-none"
@@ -28,7 +31,11 @@ function Navbar() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button className="bg-gray-100 p-4 hover:bg-gray-200" type="submit">
+        <button
+          title="search"
+          className="bg-gray-100 p-4 hover:bg-gray-200"
+          type="submit"
+        >
           <Image src={SearchIcon} alt="search" width={16} height={16} />
         </button>
       </form>
